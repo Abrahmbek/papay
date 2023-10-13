@@ -1,12 +1,9 @@
 const express = require("express");                      //express ni chaqirib olyapmiz      
 const app = express();                             // app ga express ni tenglab olyapmiz
+const router = require("./router");  
 
 
-
-// MongoDB call
- 
- const db = require("./server").db();           // mongo db ni chaqirib olyapmiz  client ni ichida db ni olyapmiz   
-const mongodb = require("mongodb");          // newmongodb ichida id bor oshaning uchun bia qaytadan require qilib oldik
+                                                           // newmongodb ichida id bor oshaning uchun bia qaytadan require qilib oldik
 
 
 //1: Kirish code
@@ -22,4 +19,7 @@ app.use(express.urlencoded({extended: true}));   // traditional frontend nni pos
 
 
 // 4 Routing code
+
+app.use("/", router);
+
 module.exports = app;
