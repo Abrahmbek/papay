@@ -3,9 +3,7 @@ const app = express();                             // app ga express ni tenglab 
 const router = require("./router");  
 
 
-                                                           // newmongodb ichida id bor oshaning uchun bia qaytadan require qilib oldik
-
-
+                                    
 //1: Kirish code
 app.use(express.static("public"));                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
 app.use(express.json());                       // kirib kelayotgan malumotlarni express json formatdan object formatiga  aylantirib olyapmiz
@@ -20,6 +18,13 @@ app.use(express.urlencoded({extended: true}));   // traditional frontend nni pos
 
 // 4 Routing code
 
-app.use("/", router);
+
+//app.use("/resto", router_bssr);    // ananaviy method 
+app.use("/", router);       // xar qanday kelgan requestlarni router file ga yubor
+
+
+
+
+
 
 module.exports = app;

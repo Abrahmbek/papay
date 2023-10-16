@@ -1,18 +1,35 @@
-let memberController = module.exports;
+const Member = require("../models/Member");
 
-memberController.home = (req, res) => {
-    console.log("Get cont.home");
-    res.send("home page");
+let memberController = module.exports;   // bitta object yasb olib unga tenglashtirib qoyamiz
+
+
+
+memberController.signup = async (req, res) => {
+   try {
+    console.log("POST: cont/sinup");
+    const data = req.body,
+    member = new Member(), new_member = await member.signupData(data);
+
+    res.json({state: 'succeed', data: new_member});
+   }catch (err) {
+     console.log(`ERORR, cont/signup`);
+     res.json({state: 'fail', message: err.message});
+   }
+
+
 };
 
-memberController.signup = (req, res) => {
-    console.log("Post cont.signup");
-    res.send("signup page");
-};
-
-memberController.login = (req, res) => {
-    console.log("Post cont.login");
-    res.send("login page");
+memberController.login = async (req, res) => {
+    try {
+        console.log("POST: cont/login");
+        const data = req.body,
+         member = new Member(), result = await member.loginData(data);
+    
+        res.json({state: 'succeed', data: result});
+       }catch (err) {
+         console.log(`ERORR, cont/signup`);
+         res.json({state: 'fail', message: err.message});
+       }
 };
 
 memberController.logout = (req, res) => {
