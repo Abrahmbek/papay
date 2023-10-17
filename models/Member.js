@@ -8,7 +8,7 @@ class Member {
     constructor() {
         this.memberModel = MemberModel;
     }
-        async signupData(input) {
+        async signupData(input) {    //async singup data bilan input olishimiz kerak
             try {
             const salt = await bcrypt.genSalt();
               input.mb_password = await bcrypt.hash(input.mb_password, salt);
@@ -46,7 +46,11 @@ class Member {
              
            assert.ok(isMatch, Definer.auth_err4);
            
-           return await this.memberModel.findOne({mb_nick: input.mb_nick}).selectedExclusively();
+           return await this.memberModel
+           .findOne({
+            mb_nick: input.mb_nick,
+          })
+          .exec();
             }catch (err) {
                 throw err;
             }
