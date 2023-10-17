@@ -2,8 +2,8 @@ const dotenv =require("dotenv");
 dotenv.config();
 
 const http = require( "http");    // http ni require qilib talab qilib oldik
-const mongoose = require("mongoose");       // mongo db ni talab qilib qilib oldik
-
+const mongoose = require("mongoose").default;       // mongo db ni talab qilib qilib oldik
+mongoose.set("strictQuery", false);
                  
 const connectionString = process.env.MONGO_URL;     //  mongo db ga kalit ulanish kodi
    
