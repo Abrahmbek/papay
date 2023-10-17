@@ -56,7 +56,7 @@ mb_point: {
 mb_top: {
     type: String,
     required: false,
-    default: 0,
+    //default: 'N',
     enum: {
         values: ordenary_enums,
         message: "{VALUE} is not among permitted values"
