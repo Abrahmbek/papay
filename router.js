@@ -2,6 +2,13 @@ const express = require("express");
 const router = express.Router();      //exprees ni ichidan routerni olob chiqamiz       //turli xil api larni addresslari qaysi api bilan kelgan addresslarni qayerga borishini xal qiladi 
 const memberController = require('./contollers/memberControllers');
 
+
+/************************************************
+ *              REST API          * 
+ **********************************************/
+
+
+
 //member routers
 
 router.post("/signup", memberController.signup);

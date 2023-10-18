@@ -1,6 +1,7 @@
 const express = require("express");                      //express ni chaqirib olyapmiz      
 const app = express();                             // app ga express ni tenglab olyapmiz
-const router = require("./router");  
+const router = require("./router.js");  
+const router_bssr = require("./router_bssr.js");  
 
 
                                     
@@ -19,7 +20,7 @@ app.use(express.urlencoded({extended: true}));   // traditional frontend nni pos
 // 4 Routing code
 
 
-//app.use("/resto", router_bssr);    // ananaviy method 
+app.use("/resto", router_bssr);    // ananaviy method 
 app.use("/", router);       // xar qanday kelgan requestlarni router file ga yubor
 
 
