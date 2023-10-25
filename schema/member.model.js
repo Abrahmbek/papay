@@ -21,7 +21,7 @@ mb_password: {
 mb_type: {
     type: String,
     required: false,
-    default: "RESTUARANT",
+    default: "RESTAURANT",
     enum: {
         values: member_type_enums,
         message: "{VALUE} is not among permitted values"

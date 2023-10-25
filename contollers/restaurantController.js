@@ -83,7 +83,7 @@ restaurantController.logout = (req, res) => {
 restaurantController.validateAuthRestaurant = ( req, res, next) => {
     if ( req.session?.member?.mb_type === "RESTAURANT") {
         req.member = req.session.member;
-        next()
+        next();
     } else res.json({
         state: "fail", 
         message: "only authenticated members with restaurant type",
@@ -92,7 +92,7 @@ restaurantController.validateAuthRestaurant = ( req, res, next) => {
 
 
 restaurantController.checkSessions= (req, res) => {
-  if (req.session.member) {
+  if (req.session?.member) {
     res.json({state: "succeed", data: req.session.member});
 
   } else{
