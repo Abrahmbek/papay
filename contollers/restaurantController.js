@@ -1,15 +1,28 @@
 const Member = require("../models/Member");    //backend ichida frontend qurilyapti
+const Product = require("../models/Product");
 
 let restaurantController = module.exports;   // bitta object yasb olib unga tenglashtirib qoyamiz
 
-restaurantController.getMyRestaurantData = async (req, res) => {     //get orqali signup page ga borish 
+restaurantController.home =(req, res)  =>{
+  try{
+   console.log("GET: cont/home");
+   res.render('home-page');
+  }catch(err) {
+    console.log(`ERORR, cont/home, ${err.message}`);
+    res.json({state: 'fail', message: err.message});
+  }
+};
+
+
+restaurantController.getMyRestaurantProducts = async (req, res) => {     //get orqali signup page ga borish 
     try{ 
-        console.log("GET: cont/getMyRestaurantData"); 
+        console.log("GET: cont/getMyRestaurantProducts"); 
           // TODO: get my restuarant product                               
-       
-          res.render('restaurant-menu');
+       const product = new Product();
+       const data = await product.getAllProductsDataResto(res.locals.member);    //router bssrga yozib otirmadikda app.jsda chaqirib ishlatyapmiz
+          res.render('restaurant-menu', {restaurant_data: data} );
     }catch(err) {
-        console.log(`ERORR, cont/getMyRestaurantData ${err.message}`);
+        console.log(`ERORR, cont/getMyRestaurantProducts ${err.message}`);
         res.json({state: 'fail', message: err.message});
     }
 }
