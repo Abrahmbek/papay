@@ -30,7 +30,7 @@ app.use(
 );
 
 app.use(function(req, res, next) {
-    res.locals.member = req.session.member;
+    res.locals.member = req.session.member;   // sesssiondadi datan i localga yuklab olyapmiz
     next();
 });
 

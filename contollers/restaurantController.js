@@ -77,8 +77,8 @@ restaurantController.loginProcess = async (req, res) => {
          member = new Member(),
           result = await member.loginData(data);
           
-          req.session.member = result;
-          req.session.save(function() {
+          req.session.member = result;        //session ni ichidan member degan object hosil qilib shunga yuklayapmiz kelgan maluotlani
+          req.session.save(function() {              // va session ni ichida save qilyapmiz
            result.mb_type ==="ADMIN"
            ? res.redirect('/resto/all-restaurant')
            : res.redirect('/resto/products/menu');
