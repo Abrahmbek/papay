@@ -58,9 +58,64 @@
             </div>
             <form onsubmit="return validateForm()" action="resto/products/create" method="POST"
             class="dish_container" enctype="multipart/form-data">
-            <div class="long_input" style="align-items: flex-end; margin-bottom: 25px;">
+            <div class="long_input" style=" display: flex; align-items: center;">
              <span class="new_dish_txt">Yangi Taom</span>
             </div>
+        <div>
+            <div class="long_input">
+                <label for="">Taom nomi</label>
+                <input type="text" placeholder="Taom nomi" name="product_name" class="product_name"/>
+                
+            </div>
+            <input name="product_status" value="PAUSED" class="product_status" hidden />
+        </div>
+            
+        <div class="half_input_frame">
+            <div class="half_input">
+                <label for="">Taom narxi</label>
+                <input type="number" placeholder="Taom narxi" name="product_price" class="product_price"/>
+                
+            </div>
+            <div class="half_input">
+                <label for="">Taom qoldiq miqdori</label>
+                <input type="number" placeholder="Taom qoldiq miqdori" name="product_left_cnt" class="product_left_cnt"/>
+                
+            </div>
+        </div>
+
+        <div class="half_input_frame">
+            <div class="half_input">
+                <label for="">Taom turi</label>
+                <select class="product_collection" name="product_collection">
+                    <option value="dish" selected>Taom</option>
+                    <option value="salad" >Salad</option>
+                    <option value="dessert">Desssert</option>
+                    <option value="drink" >Ichimlik</option>
+                    <option value="etc">Boshqa</option>
+                </select>
+            </div>
+            <div class="half_input" id="product_collection">
+                <label for="">Taom Hajmi</label>
+                <select class="product_size" name="product_size">
+                    <option value="small" >Kichik</option>
+                    <option value="normal" >O'rtacha</option>
+                    <option value="large" >Katta</option>
+                    <option value="set" >Set</option>
+                   
+                </select>
+            </div>
+            <div class="half_input" id="product_volume" style="display: none;">
+             <label for="">Ichimlik Hajmi</label>
+             <select class="product_volume" name="product_volume">
+                <option value="0.5" >0.5 litr</option>
+                <option value="1" selected >1 litr</option>
+                <option value="1.2" >1.2 litr</option>
+                <option value="1.5" >1.5 litr</option>
+                <option value="2" >2 litr</option>
+                
+            </select>
+            </div>
+        </div>
         </form>
         </div>
      </div>
