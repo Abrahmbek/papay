@@ -32,8 +32,8 @@ productController.addNewProduct = async ( req, res) => {
           const result = await product.addNewProductData(data, req.member);
          
           const html = `<script>
-                          alert(new dish added successfuly);
-                          window.location.replace('/resto/product/menu);
+                          alert('new dish added successfuly');
+                          window.location.replace('/resto/products/menu');
                           </script>`;
          res.end(html);                 
        
@@ -49,7 +49,7 @@ productController.updateChosenProduct = async ( req, res) => {
            const product = new Product();
            const id = req.params.id;
            const result = await product.updateChosenProductData(id, req.body, req.member._id);
-           await res.json({state: "sucess", data: result});  
+           await res.json({state: "success", data: result});  
 
     }catch(err) {
         console.log(`ERORR, cont/updateChosenProduct  ${err.message}`);
