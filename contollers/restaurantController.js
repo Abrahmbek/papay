@@ -88,8 +88,8 @@ restaurantController.loginProcess = async (req, res) => {
           result = await member.loginData(data);
           
           req.session.member = result;        //session ni ichidan member degan object hosil qilib shunga yuklayapmiz kelgan maluotlani
-          req.session.save(function() {              // va session ni ichida save qilyapmiz
-           result.mb_type ==="ADMIN"
+          req.session.save( () => {              // va session ni ichida save qilyapmiz
+           result.mb_type === "ADMIN"
            ? res.redirect('/resto/all-restaurant')
            : res.redirect('/resto/products/menu');
           });
@@ -132,5 +132,34 @@ restaurantController.checkSessions= (req, res) => {
 
   } else{
     res.json({state: "fail", message: "you are not authenticated"});
+  }
+};
+
+
+restaurantController.validateAdmin = ( req, res, next) => {
+  if ( req.session?.member?.mb_type === "ADMIN") {
+      req.member = req.session.member;
+      next();
+  } else {
+    
+    const html = `<script>
+                 alert('Admin page: Permission Denied');
+                  window.location.replace('/resto');
+               </script>`;
+     res.end(html);  
+  }
+};
+
+restaurantController.getAllRestaurants = (req, res) => {
+  try {
+    console.log("Get cont/getAllRestaurants");
+   
+    res.render("all-restaurants");
+
+
+
+  }catch {
+    console.log(`ERORR, cont/getAllRestaurants, ${err.message}`);
+    res.json({state: 'fail', message: err.message});
   }
 };
