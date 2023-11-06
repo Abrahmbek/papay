@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { member_type_enums, member_status_enums,ordenary_enums } = require("../lib/config");
+const { member_type_enums, member_status_enums, ordinary_enums, } = require("../lib/config");
 const Member = require("../models/Member");
 
 const memberSchema = new mongoose.Schema({
@@ -56,9 +56,9 @@ mb_point: {
 mb_top: {
     type: String,
     required: false,
-    //default: 'N',
+   default: 'N',
     enum: {
-        values: ordenary_enums,
+        values: ordinary_enums ,
         message: "{VALUE} is not among permitted values"
     },
 },
