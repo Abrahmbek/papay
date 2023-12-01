@@ -14,6 +14,7 @@ const memberController = require('./contollers/memberControllers');
 router.post("/sign-up", memberController.signup);
 router.post("/login", memberController.login);
 router.get("/logout", memberController.logout);
+router.get("/check-me", memberController.checkMyAuthantication);
 
 
 //other routers

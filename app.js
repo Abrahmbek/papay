@@ -1,7 +1,8 @@
 const express = require("express");                      //express ni chaqirib olyapmiz      
 const app = express();                             // app ga express ni tenglab olyapmiz
 const router = require("./router.js");  
-const router_bssr = require("./router_bssr.js");  
+const router_bssr = require("./router_bssr.js"); 
+const cookieParser = require("cookie-parser"); 
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -14,6 +15,8 @@ const store = new MongoDBStore({
 app.use(express.static("public"));                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
 app.use(express.json());                       // kirib kelayotgan malumotlarni express json formatdan object formatiga  aylantirib olyapmiz
 app.use(express.urlencoded({extended: true}));   // traditional frontend nni post qilib otkazib yuboryapti
+app.use(cookieParser());
+
 
 // 2: Session code
 
