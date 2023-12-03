@@ -4,17 +4,21 @@ const Definer = require("../lib/mistake");
 
 let productController = module.exports;
 
-
-productController.getAllproducts = async ( req, res) => {
+productController.getAllProducts = async (req, res) =>{
     try{ 
-        console.log("GET: cont/getAllproducts"); 
-                   
-
+        console.log("POST: cont/getAllProducts"); 
+            const product = new Product();
+            const results = await product.getAllProductsData(req.member, req.body);       
+         res.json({state: 'succeed', data: results});
     }catch(err) {
-        console.log(`ERORR, cont/getAllproducts ${err.message}`);
+        console.log(`ERORR, cont/getAllProducts ${err.message}`);
         res.json({state: 'fail', message: err.message});
     }
 };
+
+/************************************************
+ *           BSSR Related Method       * 
+ **********************************************/
 
 productController.addNewProduct = async ( req, res) => {
     try{ 
@@ -57,3 +61,4 @@ productController.updateChosenProduct = async ( req, res) => {
       
     }
 };
+
