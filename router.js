@@ -25,6 +25,11 @@ router.post("/products",
 memberController.retrieveAuthMember,
 productController.getAllProducts);
 
+router.get("products/:id",
+memberController.retrieveAuthMember,
+productController.getChosenProducts
+ );
+
 
 // router.get("/menu", (req, res) => {
 //     res.send("menu page");

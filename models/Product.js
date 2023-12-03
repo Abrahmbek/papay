@@ -3,6 +3,7 @@ const { shapeIntoMongooseObjectId } = require("../lib/config");
 
 const ProductModel = require("../schema/product.model");
 const Definer = require("../lib/mistake");
+const Member = require("./Member");
 
 class Product {
     constructor() {
@@ -40,7 +41,28 @@ class Product {
         throw err
       }
     }
+   async getChosenProductData(member, id) {
+    try{
+    const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+     id = shapeIntoMongooseObjectId(id);
 
+     if(member) {
+      const member_ob = new Member();
+      member_ob.viewChosenItemByMember(member, id, "product");
+     }
+
+     const result = await this.productModel
+     .aggregate([
+      { $match: {_id: id, product_status: "PROCESS"}},
+     ])
+     .exec();
+ 
+     assert.ok(result, Definer.auth_err1);
+     return result;
+    }catch (err) {
+      throw err;
+    }
+   }
 
     
   async  getAllProductsDataResto(member) {

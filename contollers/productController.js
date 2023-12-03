@@ -8,14 +8,28 @@ productController.getAllProducts = async (req, res) =>{
     try{ 
         console.log("POST: cont/getAllProducts"); 
             const product = new Product();
-            const results = await product.getAllProductsData(req.member, req.body);       
-         res.json({state: 'succeed', data: results});
+            const result = await product.getAllProductsData(req.member, req.body);       
+         res.json({state: 'succeed', data: result});
     }catch(err) {
         console.log(`ERORR, cont/getAllProducts ${err.message}`);
         res.json({state: 'fail', message: err.message});
     }
 };
 
+
+productController.getChosenProducts = async (req, res) =>{
+    try{ 
+        console.log("GET: cont/getChosenProducts"); 
+         const product = new Product(),
+           id = req.params.id,
+           result = await product.getChosenProductData(req.member, id);       
+        
+         res.json({state: 'succeed', data: result});
+    }catch(err) {
+        console.log(`ERORR, cont/getChosenProducts ${err.message}`);
+        res.json({state: 'fail', message: err.message});
+    }
+};
 /************************************************
  *           BSSR Related Method       * 
  **********************************************/
