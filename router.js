@@ -15,6 +15,9 @@ router.post("/sign-up", memberController.signup);
 router.post("/login", memberController.login);
 router.get("/logout", memberController.logout);
 router.get("/check-me", memberController.checkMyAuthantication);
+router.get("/member/:id",
+memberController.retrieveAuthMember,
+memberController.getChosenMember);
 
 
 //other routers
