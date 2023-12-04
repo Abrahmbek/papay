@@ -11,7 +11,7 @@ class View {
             this.mb_id = mb_id;
       }
 
-      async validateChosenTarget(_id, group_type) {
+      async validateChosenTarget(view_ref_id, group_type) {
             try{
              let result;
              switch(group_type) {
@@ -26,7 +26,7 @@ class View {
           case "product":
              result = await this.productModel
               .findOne({
-                _id: _id, 
+                _id: view_ref_id, 
                   mb_status: "PROCESS",
              })
              .exec();
@@ -42,7 +42,7 @@ class View {
             const new_view = new this.viewModel({
               mb_id: this.mb_id,
               view_ref_id: view_ref_id,
-              view_group: group_type    
+              view_group: group_type,   
             });
            const result = await new_view.save();
 
@@ -64,7 +64,8 @@ class View {
                   {
               _id: view_ref_id,
               },
-               {$inc: {mb_views: 1}})
+               {$inc: {mb_views: 1}}
+               )
              .exec();
              break;
 
