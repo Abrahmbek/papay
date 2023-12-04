@@ -76,6 +76,7 @@ class Member {
           .exec();
 
           assert.ok(result, Definer.auth_err2);
+          return result;
             }catch (err) {
                 throw err;
             }
@@ -89,10 +90,10 @@ class Member {
             const view = new View(mb_id);
              //validation needed
               const isValid = await view.validateChosenTarget(view_ref_id, group_type);
-               assert.ok(isValid, Definer.auth_err2);
+               assert.ok(isValid, Definer.general_err2);
              //logged user has been target before
             const doesExist = await view.checkViewExistance(view_ref_id);
-            console.log("doesExist", doesExist);
+            console.log("doesExist:", doesExist);
           
             if(!doesExist) {
              const result = await view.insertMemberView(view_ref_id, group_type);

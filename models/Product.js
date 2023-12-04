@@ -34,7 +34,9 @@ class Product {
              {$skip:(data.page * 1 - 1) * data.limit},
             { $limit: data.limit * 1},
             ])
-          exec();
+
+          .exec();
+           console.log(result);
         assert.ok(result, Definer.general_err1);
         return result;
       } catch(err) {
@@ -47,8 +49,8 @@ class Product {
      id = shapeIntoMongooseObjectId(id);
 
      if(member) {
-      const member_ob = new Member();
-      member_ob.viewChosenItemByMember(member, id, "product");
+      const member_obj = new Member();
+      member_obj.viewChosenItemByMember(member, id, "product");
      }
 
      const result = await this.productModel
@@ -56,7 +58,7 @@ class Product {
       { $match: {_id: id, product_status: "PROCESS"}},
      ])
      .exec();
- 
+     console.log("result:", result);
      assert.ok(result, Definer.auth_err1);
      return result;
     }catch (err) {

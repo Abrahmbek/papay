@@ -13,7 +13,7 @@ memberController.signup = async (req, res) => {
     member = new Member(),
      new_member = await member.signupData(data);       //data ni yuboramiz
 
- 
+       console.log("result:::", new_member);
       const token = memberController.createToken(new_member);
     
 
@@ -52,8 +52,8 @@ memberController.login = async (req, res) => {
 };
 
 memberController.logout = (req, res) => {
-    console.log("Get cont.logout");
-    re.cookie("access_token", null, {maxAge: 0, httpOnly: true});
+    console.log("GET cont/logout");
+    res.cookie("access_token", null, {maxAge: 0, httpOnly: true});
    res.json({state: 'succeed', data: "logout successfully!!"});
 };
 
@@ -98,7 +98,7 @@ memberController.checkMyAuthantication = (req, res) => {
   }
 };
 
-memberController.getChosenMember= async  (req, res) => {
+memberController.getChosenMember = async  (req, res) => {
     try {
         console.log("GET cont/getChosenMember");
         const id = req.params.id;
@@ -108,7 +108,7 @@ memberController.getChosenMember= async  (req, res) => {
         
         res.json({state: 'succeed', data: result});
        }catch (err) {
-         console.log(`ERORR, cont/getChosenMember${err.message}`);
+         console.log(`ERORR, cont/getChosenMember,${err.message}`);
          res.json({state: 'fail', message: err.message});
        }
 };
