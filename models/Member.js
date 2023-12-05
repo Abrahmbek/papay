@@ -61,8 +61,8 @@ class Member {
       async getChosenMemberData(member, id){
             try {
           id = shapeIntoMongooseObjectId(id); 
-          console.log("member::::", member);
-
+          console.log("member:::", member);
+            console.log("id:::", id);
          if (member) {
           //condition if not seen before
           await this.viewChosenItemByMember(member, id, "member");
@@ -75,22 +75,27 @@ class Member {
       ])
           .exec();
 
-          assert.ok(result, Definer.auth_err2);
-          return result;
-            }catch (err) {
+          assert.ok(result, Definer.general_err2);
+          return result[0];
+
+            }catch (err)
+             { console.log('....err');
                 throw err;
             }
         }
     
         async viewChosenItemByMember(member, view_ref_id, group_type) {
+
           try {
+            console.log(' viewChosenItemByMembe');
             view_ref_id = shapeIntoMongooseObjectId(view_ref_id);
             const mb_id = shapeIntoMongooseObjectId(member._id);
 
             const view = new View(mb_id);
              //validation needed
               const isValid = await view.validateChosenTarget(view_ref_id, group_type);
-               assert.ok(isValid, Definer.general_err2);
+
+               assert.ok(isValid, Definer.general_err1);
              //logged user has been target before
             const doesExist = await view.checkViewExistance(view_ref_id);
             console.log("doesExist:", doesExist);

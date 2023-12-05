@@ -59,7 +59,7 @@ class Product {
      ])
      .exec();
      console.log("result:", result);
-     assert.ok(result, Definer.auth_err1);
+     assert.ok(result, Definer.general_err1);
      return result;
     }catch (err) {
       throw err;

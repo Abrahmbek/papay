@@ -13,22 +13,23 @@ class View {
 
       async validateChosenTarget(view_ref_id, group_type) {
             try{
+               console.log('validateChosenTarge ');
              let result;
              switch(group_type) {
              case "member":
               result = await this.memberModel
-               .findOne({
-                _id: _id, 
+               .findById({
+                _id: view_ref_id, 
                   mb_status: "ACTIVE",
              })
              .exec();
              break;
-          case "product":
+           case "product":
              result = await this.productModel
-              .findOne({
+              .findById({
                 _id: view_ref_id, 
                   mb_status: "PROCESS",
-             })
+                    })
              .exec();
              break;
              }
@@ -86,7 +87,7 @@ class View {
       }
 
        async checkViewExistance(view_ref_id) {
-            try{
+            try{   
            const view = await this.viewModel
            .findOne({
             mb_id: this.mb_id,
@@ -95,6 +96,7 @@ class View {
            .exec();
              return view ? true : false;
             }catch (err){
+               console.log(' checkViewExistance ');
              throw err;
             }
       }

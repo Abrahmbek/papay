@@ -102,11 +102,12 @@ memberController.getChosenMember = async  (req, res) => {
     try {
         console.log("GET cont/getChosenMember");
         const id = req.params.id;
+        console.log("getchosenmember:", id);
         const member = new Member();
         const result = await member.getChosenMemberData( req.member, id);
 
         
-        res.json({state: 'succeed', data: result});
+        res.json({state: 'succeed', data: result });
        }catch (err) {
          console.log(`ERORR, cont/getChosenMember,${err.message}`);
          res.json({state: 'fail', message: err.message});
