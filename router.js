@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();      //exprees ni ichidan routerni olob chiqamiz       //turli xil api larni addresslari qaysi api bilan kelgan addresslarni qayerga borishini xal qiladi 
 const memberController = require('./contollers/memberControllers');
 const productController = require('./contollers/productController');
+const restaurantController = require('./contollers/restaurantController');
 
 /************************************************
  *              REST API          * 
@@ -30,12 +31,10 @@ memberController.retrieveAuthMember,
 productController.getChosenProducts
  );
 
+//  Restaurant related routers
+router.get("/restaurants",
+memberController.retrieveAuthMember,
+restaurantController.getResrtaurants
+ );
 
-// router.get("/menu", (req, res) => {
-//     res.send("menu page");
-// });
-
-// router.get("/community", (req, res) => {
-//     res.send("coomunity page");
-// });
 module.exports = router;
