@@ -87,7 +87,7 @@ class Member {
         async viewChosenItemByMember(member, view_ref_id, group_type) {
 
           try {
-            console.log(' viewChosenItemByMembe');
+         
             view_ref_id = shapeIntoMongooseObjectId(view_ref_id);
             const mb_id = shapeIntoMongooseObjectId(member._id);
 
