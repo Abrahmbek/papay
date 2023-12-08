@@ -3,7 +3,7 @@ const router = express.Router();      //exprees ni ichidan routerni olob chiqami
 const memberController = require('./contollers/memberControllers');
 const productController = require('./contollers/productController');
 const restaurantController = require('./contollers/restaurantController');
-
+const orderController = require('./contollers/orderController');
 /************************************************
  *              REST API          * 
  **********************************************/
@@ -33,14 +33,22 @@ productController.getChosenProducts
 
 //  Restaurant related routers
 router.get("/restaurants",
-memberController.retrieveAuthMember,
-restaurantController.getResrtaurants
+memberController.retrieveAuthMember,     // kim mana shu resto larga zapros beryapti? shuni bilish uchun qaysi restolarga like bosigan shun bilish uchun 
+restaurantController.getResrtaurants         //yangi method hosil qilamiz
  );
 
  router.get("/restaurants/:id",
-memberController.retrieveAuthMember,
+memberController.retrieveAuthMember,      // kim mana shu resto larga zapros beryapti? shuni bilish uchun qaysi restolarga like bosigan shun bilish uchun 
 restaurantController.getChosenResrtaurants
  );
+
+
+ //Order related routers
+
+ router.post("/orders/create",
+memberController.retrieveAuthMember,
+orderController.createOrder
+);
 
 
 module.exports = router;

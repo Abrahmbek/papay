@@ -6,13 +6,13 @@ const Restaurant = require("../models/Restaurant");
 
 let restaurantController = module.exports;   // bitta object yasb olib unga tenglashtirib qoyamiz
 
-restaurantController.getResrtaurants = async (req, res) => {
+restaurantController.getResrtaurants = async (req, res) => {   // req, res  parametr beryapmiz
   try {
       console.log("GET: cont/getMyRestaurants"); 
-      const data = req.query,
-     restaurant = new Restaurant(),
-     result = await restaurant.getResrtaurantsData(req.member, data);
-   res.json({state: 'success', data: result});
+      const data = req.query,                      // reqning query qismidan malumotlani olyapmiz   //pagination order limit 
+     restaurant = new Restaurant(),                // Restaurant service modeldan instance ovolpmiz
+     result = await restaurant.getResrtaurantsData(req.member, data);  //restqaurant object ni ichidan member hosil qilib olamiz va req.member va datani pathi qilamiz 
+   res.json({state: 'success', data: result});    //getResrtaurantsData dan qaytkan maulomotlani json formatdda qabul qilib olyapmiz
   } catch(err) {
     console.log(`ERORR, cont/home, ${err.message}`);
     res.json({state: 'fail', message: err.message});
@@ -24,7 +24,7 @@ restaurantController.getChosenResrtaurants = async (req, res) => {
       console.log("GET: cont/getChosenResrtaurants"); 
       const id = req.params.id;
       const restaurant = new Restaurant();
-      const result =  await restaurant.getChosenResrtaurantData(req.member, id);
+      const result =  await restaurant.getChosenResrtaurantData(req.member, id);    //restqaurant object ni ichidan getChosenResrtaurantData method hosil qilib olyapmiz
       
    res.json({state: 'success', data: result});
   } catch(err) {
