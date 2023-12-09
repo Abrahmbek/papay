@@ -8,7 +8,7 @@ const OrderItemModel = require("../schema/order_item.model");
 class Order {
       constructor() {
             this.orderModel = OrderModel;
-            this.orderItemModel = OrderItemModel;
+            this.OrderItemModel = OrderItemModel;
       }
       async createOrderData(member, data) {
             try {
