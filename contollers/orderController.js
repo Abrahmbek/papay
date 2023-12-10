@@ -37,3 +37,20 @@ orderController.getMyOrders = async( req, res) => {
      res.json({state: 'fail', message: err.message});
   }
 };
+
+
+orderController.editChosenOrder = async (req, res) => {
+  try{
+ console.log("POST: cont/editChosenOrderr");   
+    assert.ok(req.member, Definer.auth_err5);
+
+    const order = new Order();
+   const  result = await order.editChosenOrderData(req.member, req.body);
+     res.json({state: 'succeed', data: result});
+  }catch(err){
+console.log(`ERORR, cont/editChosenOrder ${err.message}`);
+     res.json({state: 'fail', message: err.message});
+  }
+
+
+}
