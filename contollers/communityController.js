@@ -2,7 +2,7 @@ let communityController = module.exports;
 
 const Definer = require("../lib/mistake");
 const assert = require("assert");
-const Community = require("../models/Community");
+const Community = require("../models/community");
 
 
 communityController.imageInsertion = async (req, res) => {
@@ -40,7 +40,7 @@ communityController.getMemberArticles = async (req, res) => {
    
    const community = new Community();
    
-   const mb_id = req.query.mb_id !== 'none'  ? req.member.query.mb_id  : req.member?._id;
+   const mb_id = req.query.mb_id !== 'none'  ? req.query.mb_id  : req.member?._id;
    assert.ok(mb_id, Definer.article_err1);
 
     const result = await  community.getMemberArticlesData(req.member, mb_id, req.query);
