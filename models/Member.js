@@ -94,7 +94,7 @@ class Member {
             const view = new View(mb_id);
              //validation needed
               const isValid = await view.validateChosenTarget(view_ref_id, group_type);
-
+               console.log("isvalid:::", isValid);
                assert.ok(isValid, Definer.general_err1);
              //logged user has been target before
             const doesExist = await view.checkViewExistance(view_ref_id);
