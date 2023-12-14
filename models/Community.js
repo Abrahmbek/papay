@@ -69,7 +69,7 @@ class Community {
 
         async getArticlesData(member, inquery) {
             try{
-                const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+                const auth_mb_id = shapeIntoMongooseObjectId(member?._id);   //login bolgan usermi bolmaganmi ahamiyati yoq
                 let matches = 
                 inquery.bo_id ==="all" ? 
                 {bo_id: {$in: board_id_enum_list}, art_status: "active"}
@@ -88,7 +88,7 @@ class Community {
                     { $skip: (inquery.page -1) * inquery.limit},
                      {
                     $lookup: {
-                        from: 'members',
+                        from: 'members',     //hosil qilingan member ni birlashtirish maqsadida
                         localField: "mb_id",
                         foreignField: "_id",
                         as: "member_data",
