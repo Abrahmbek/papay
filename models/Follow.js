@@ -94,6 +94,37 @@ class Follow {
       throw err;
     }
   }
+
+  async getMemberFollowingsData(inqury) {
+    try {
+     
+      const subscriber_id = shapeIntoMongooseObjectId(inqury.mb_id),
+      page = inqury.page * 1,
+      limit = inqury.limit * 1;
+
+      const result = await this.followModel.aggregate([
+        {$match : {subscriber_id: subscriber_id}},
+        {$sort: {createdAt: -1 } },
+        {$skip: (page -1) * limit},
+        {$limit: limit},
+          {
+                $lookup: {
+                from: 'members',
+                localField: "follow_id",
+                foreignField: "_id",
+                as: "follow_member_data",
+             },
+        },
+          {$unwind: "$follow_member_data"}, // biz aniq bilamiz bu arrayda faqat bitta object bor shuning uchun
+      ])
+      .exec();
+
+      assert.ok(result, Definer.follow_err3);
+      return result;
+    }catch(err) {
+      throw err;
+    }
+  }
 }
 
 
