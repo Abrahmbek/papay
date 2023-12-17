@@ -48,3 +48,17 @@ followController.getMemberFollowings = async (req, res) => {
      res.json({state: 'fail', message: err.message});
   }
 };
+
+followController.getMemberFollowers = async (req, res) => {
+      try{
+     console.log("POST: cont/getMemberFollowers" );   
+  
+   const follow = new Follow();
+    const result =  await follow.getMemberFollowersData(req.member, req.query);
+
+     res.json({state: 'succeed', data: result});
+  }catch(err){
+     console.log(`ERORR, cont/getMemberFollowings ${err.message}`);
+     res.json({state: 'fail', message: err.message});
+  }
+};
