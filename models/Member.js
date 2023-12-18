@@ -2,8 +2,9 @@ const MemberModel = require("../schema/member.model");
 const Definer = require ("../lib/mistake");
 const assert = require("assert");
 const bcrypt = require('bcryptjs');
-const { shapeIntoMongooseObjectId, lookup_auth_member_following } = require("../lib/config");
+const { shapeIntoMongooseObjectId, lookup_auth_member_following, lookup_auth_member_liked } = require("../lib/config");
 const View = require("./View");
+const Like = require("./Like");
 
 
 class Member {
@@ -72,6 +73,8 @@ class Member {
          if (member) {
           //condition if not seen before
           await this.viewChosenItemByMember(member, id, "member");
+
+          aggregateQuery.push(lookup_auth_member_liked(auth_mb_id));
             aggregateQuery.push(lookup_auth_member_following(auth_mb_id, 'members'));
          }
 
@@ -110,6 +113,37 @@ class Member {
            return true;
 
           } catch (err) {
+            throw err;
+          }
+        }
+
+        async likeChosenItemMember( member, like_ref_id, group_type) {
+          try{
+           like_ref_id = shapeIntoMongooseObjectId(like_ref_id);
+           const mb_id = shapeIntoMongooseObjectId(member._id);
+      
+           const like = new Like(mb_id);
+           const isValid = await like.validateTargetItem(like_ref_id, group_type);
+           console.log(isValid);
+           assert.ok(isValid, Definer.general_err2);
+
+           const doesExist = await like.checkLikeExistence(like_ref_id);
+           console.log("doesExist::", doesExist);
+
+           let data = doesExist
+           ? await like.removeMemberLike(like_ref_id, group_type)
+           : await like.insertMemberLike(like_ref_id, group_type);
+           assert.ok(data, Definer.general_err1);
+           
+           const result ={
+            like_group: data.like_group,
+            like_ref_id: data.like_ref_id,
+            like_status: doesExist ? 0 : 1,
+           };
+
+           return result;
+     
+          }catch(err) {
             throw err;
           }
         }

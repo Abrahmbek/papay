@@ -2,7 +2,7 @@
 const MemberModel = require("../schema/member.model");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const { shapeIntoMongooseObjectId, lookup_auth_member_liked } = require("../lib/config");
 const Member = require("../models/Member");
 //const { exec } = require("child_process");
 
@@ -40,7 +40,7 @@ class Restaurant {
         // xar uchalasiga tegishli bolganligi uchun tashqarida yozib olyapmiz
           aggregationQuery.push({$skip: (data.page - 1) * data.limit});     // pagelani skip qilib beradi masalan bizaga 4 tta kerak bolsa 4 ttani oladi qolganini skip qilib yuboradi
           aggregationQuery.push({$limit: data.limit});
-          //member liked target
+          aggregationQuery.push(lookup_auth_member_liked(auth_mb_id));
 
           const result = await  this.memberModel.aggregate(aggregationQuery).exec();  // memberschemamodeldan aggregate qilamiz va aggregation query qiyamtlarini oladi
           assert.ok( result, Definer.general_err1);   //assert orqali tekshirib olamiz
