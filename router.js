@@ -26,7 +26,7 @@ router.get("/member/:id",
 memberController.retrieveAuthMember,
 memberController.getChosenMember);
 
-router.post("/member-liked",
+router.post("/member-liken",
 memberController.retrieveAuthMember,
 memberController.likeMemberChosen);
 
