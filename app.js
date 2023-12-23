@@ -3,7 +3,7 @@ const app = express();                             // app ga express ni tenglab 
 const router = require("./router.js");  
 const router_bssr = require("./router_bssr.js"); 
 const cookieParser = require("cookie-parser"); 
-
+const cors = require('cors');
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const store = new MongoDBStore({
@@ -12,10 +12,17 @@ const store = new MongoDBStore({
 });
                                     
 //1: Kirish code
-app.use(express.static("public"));                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
+app.use(express.static("public"));
+app.use("uploads", express.static(__dirname + "/uploads") );                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
 app.use(express.json());                       // kirib kelayotgan malumotlarni express json formatdan object formatiga  aylantirib olyapmiz
 app.use(express.urlencoded({extended: true}));   // traditional frontend nni post qilib otkazib yuboryapti
 app.use(cookieParser());
+app.use(
+    cors({
+        credentials: true,
+        origin: true,
+    })
+);
 
 
 // 2: Session code
