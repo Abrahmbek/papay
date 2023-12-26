@@ -13,9 +13,11 @@ class Member {
     }
         async signupData(input) {    //async singup data bilan input olishimiz kerak
             try {
+              console.log("signup data is working...");
             const salt = await bcrypt.genSalt();
               input.mb_password = await bcrypt.hash(input.mb_password, salt);
             const new_member = new this.memberModel(input);
+            
                 
             let result;
              try {

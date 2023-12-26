@@ -19,7 +19,7 @@ memberController.signup = async (req, res) => {
 
      res.cookie("access_token", token,
      {maxAge:6 * 3600 * 1000, 
-      httpOnly: true});
+      httpOnly: false});
 
 
     res.json({state: 'succeed', data: new_member});
@@ -42,7 +42,7 @@ memberController.login = async (req, res) => {
 
      res.cookie("access_token", token,
      {maxAge:6 * 3600 * 1000, 
-      httpOnly: true});
+      httpOnly: false});
 
         res.json({state: 'succeed', data: result});
        }catch (err) {

@@ -1,5 +1,5 @@
 const express = require("express");  
-const path = require("path");                    //express ni chaqirib olyapmiz      
+//const path = require("path");                    //express ni chaqirib olyapmiz      
 const app = express();                             // app ga express ni tenglab olyapmiz
 const router = require("./router.js");  
 const router_bssr = require("./router_bssr.js"); 
@@ -14,7 +14,7 @@ const store = new MongoDBStore({
                                     
 //1: Kirish code
 app.use(express.static("public"));
-app.use("uploads", express.static(__dirname + "/uploads") );                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
+app.use("/uploads", express.static(__dirname + "/uploads") );                  //  routing ichidagi public file ni serverga ulanga klient larga ochib beryapmiz
 app.use(express.json());                       // kirib kelayotgan malumotlarni express json formatdan object formatiga  aylantirib olyapmiz
 app.use(express.urlencoded({extended: true}));   // traditional frontend nni post qilib otkazib yuboryapti
 app.use(cookieParser());
