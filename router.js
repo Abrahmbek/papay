@@ -30,6 +30,12 @@ router.post("/member-liken",
 memberController.retrieveAuthMember,
 memberController.likeMemberChosen);
 
+router.post("/member/update",
+uploader_member.single("mb_image"),
+memberController.retrieveAuthMember,
+memberController.updateMember
+);
+
 
 //other routers
 router.post("/products",

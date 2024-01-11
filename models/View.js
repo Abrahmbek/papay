@@ -15,7 +15,7 @@ class View {
 
       async validateChosenTarget(view_ref_id, group_type) {
             try{
-               console.log('validateChosenTarge ');
+               console.log('validateChosenTarget ');
              let result;
              switch(group_type) {
              case "member":
