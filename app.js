@@ -1,4 +1,5 @@
 const express = require("express");  
+const http = require( "http");  
 //const path = require("path");                    //express ni chaqirib olyapmiz      
 const app = express();                             // app ga express ni tenglab olyapmiz
 const router = require("./router.js");  
@@ -61,8 +62,33 @@ app.use("/resto", router_bssr);    // ananaviy method
 app.use("/", router);       // xar qanday kelgan requestlarni router file ga yubor
 
 
+ const server = http.createServer(app); 
+/**SOCKET.IO BACKEND SERVER */
+
+const io = require("socket.io")(server, {
+    serverClient: false,
+    origins: "*:*",
+    transport: ["websocket", "xhr-polling"],
+});
+
+let online_users = 0;
+io.on("connection", function(socket) {
+    online_users++;
+    console.log("New user, total:", online_users);
+    socket.emit("greetMsg", {text: "welcome"});
+    io.emit("infoMsg", {total: online_users});
+
+    socket.on('disconnect', function() {
+        online_users--;
+        socket.broadcast.emit("infoMsg", {total: online_users});
+        console.log("client disconnected, total:", online_users);
+    });
+
+    socket.on("createMsg", function (data) {
+        console.log("createMsg:", data);
+        io.emit("newMsg", data);
+    });
+});
 
 
-
-
-module.exports = app;
+module.exports = server;

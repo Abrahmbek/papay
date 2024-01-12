@@ -1,7 +1,7 @@
 const dotenv =require("dotenv");
 dotenv.config();
 
-const http = require( "http");    // http ni require qilib talab qilib oldik
+ 
 const mongoose = require("mongoose").default;       // mongo db ni talab qilib qilib oldik
 mongoose.set("strictQuery", false);
                  
@@ -20,8 +20,8 @@ mongoose.connect(                        //mongo db ni 3 xil yol bilan elon qili
         else {                                                    // aks holda mongo db ga ulansin
             console.log("Mongo connection succeed");       
              //console.log(goose);                                                   
-            const app = require("./app");                  // app js ni sorab oldik shu yerda ishga tushiryapmiz
-            const server = http.createServer(app);             // http server yartib ichida app ni chaqirib olyapmiz
+            const server = require("./app");                  // app js ni sorab oldik shu yerda ishga tushiryapmiz
+                                           
             let PORT = process.env.PORT || 3003;                                    //port 3000 da korsat deyapmiz
            
             server.listen(PORT, function() {                   
