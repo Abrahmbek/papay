@@ -86,6 +86,7 @@ class Community {
                 .aggregate([
                     {$match: matches},
                     {$sort: sort},
+                     {$limit: inquery.limit},
                     { $skip: (inquery.page -1) * inquery.limit},
                      {
                     $lookup: {
